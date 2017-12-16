@@ -39,7 +39,7 @@ public class Shard {
                         .filter(Cell::isAlive)
                         .count())
                 .reduce(0L, (a, b) -> a + b);
-        return aliveNeighbors == 4;
+        return aliveNeighbors == 9;
     }
 
 }

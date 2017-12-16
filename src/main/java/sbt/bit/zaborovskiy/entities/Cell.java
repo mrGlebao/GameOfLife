@@ -8,6 +8,12 @@ public class Cell implements Cloneable {
 
     private boolean isAlive;
 
+    public Cell(int row, int column, boolean isAlive) {
+        this.row = row;
+        this.column = column;
+        this.isAlive = isAlive;
+    }
+
     @Override
     public Cell clone() {
         try {
@@ -26,5 +32,10 @@ public class Cell implements Cloneable {
 
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    @Override
+    public String toString() {
+        return isAlive ? "+" : "0";
     }
 }
