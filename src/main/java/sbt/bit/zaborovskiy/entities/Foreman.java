@@ -9,35 +9,56 @@ import java.util.concurrent.Executors;
 public class Foreman extends Thread {
     private Cell[][] roadMap;
 
-    private List<Pair> availableWork;
+    private List<Worker> employees;
+
+    private volatile List<Pair> availableWork;
+
+    private volatile boolean isWorking;
 
     private ExecutorService exec = Executors.newCachedThreadPool();
     private Grid grid;
 
-    public Foreman(Grid grid) {
+    public Foreman(Grid grid, int employeesSize) {
         this.grid = grid;
         this.roadMap = new Cell[grid.size][grid.size];
+        employees = new ArrayList<>();
+        for (int i = 0; i < employeesSize; i++) {
+            employees.add(new Worker(this, grid));
+        }
     }
 
     public synchronized Pair getPair() {
-        return availableWork.isEmpty() ? null : availableWork.remove(0);
+        return (availableWork == null || availableWork.isEmpty())
+                ? null
+                : availableWork.remove(0);
     }
 
     public void run() {
-        int size = this.roadMap.length;
-        availableWork = generatePairs(size);
-        System.out.println("New worker!");
-        exec.execute(new Worker(this, grid));
-        System.out.println("New worker!");
-        exec.execute(new Worker(this, grid));
-        System.out.println("New worker!");
-        exec.execute(new Worker(this, grid));
-        while(!availableWork.isEmpty()) {
-//            System.out.println(availableWork.size());
+        isWorking = true;
+//        availableWork = generatePairs(grid.size);
+        for (Worker work : employees) {
+            System.out.println("New worker! " + work.position);
+//            exec.execute(work);
+            work.start();
+        }
+        for (int i = 0; i < 3; i++) {
+            System.out.println("New cycle");
+            int size = grid.size;
+            availableWork = generatePairs(size);
+            System.out.println("Start loop");
+            while (!availableWork.isEmpty()) {
+//                System.out.println(availableWork.size());
+            }
+            System.out.println("end loop");
+            updateGrid();
         }
         exec.shutdown();
-        updateGrid();
-
+        isWorking = false;
+//        for(Worker work : employees) {
+//            System.out.println("Interrupt thread "+work.position);
+//            work.interrupt();
+//        }
+        //exec.shutdownNow();
     }
 
     private void updateGrid() {
@@ -48,8 +69,8 @@ public class Foreman extends Thread {
 
     private List<Pair> generatePairs(int size) {
         List<Pair> pairs = new ArrayList<>();
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j< size; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 pairs.add(new Pair(i, j));
             }
         }
@@ -60,10 +81,19 @@ public class Foreman extends Thread {
         roadMap[result.row][result.column] = result;
     }
 
+    public boolean hasWork() {
+        return availableWork != null && !availableWork.isEmpty();
+    }
+
+    public synchronized boolean isWorking() {
+        return isWorking;
+    }
+
     public class Pair {
         public int row;
         public int column;
-        public Pair(int row, int column){
+
+        public Pair(int row, int column) {
             this.row = row;
             this.column = column;
         }

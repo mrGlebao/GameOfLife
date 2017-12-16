@@ -1,6 +1,7 @@
 package sbt.bit.zaborovskiy.entities;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * 3x3 piece of grid. A cell with neighbors
@@ -36,10 +37,16 @@ public class Shard {
     public boolean cellWillBeAlive() {
         long aliveNeighbors = Arrays.stream(subGrid)
                 .map(elem -> Arrays.stream(elem)
+                        .filter(Objects::nonNull)
                         .filter(Cell::isAlive)
                         .count())
                 .reduce(0L, (a, b) -> a + b);
-        return aliveNeighbors == 9;
+
+        if (center.isAlive()) {
+            return aliveNeighbors == 2 || aliveNeighbors == 3;
+        } else if (!center.isAlive()) {
+            return aliveNeighbors == 3;
+        } else return false;
     }
 
 }

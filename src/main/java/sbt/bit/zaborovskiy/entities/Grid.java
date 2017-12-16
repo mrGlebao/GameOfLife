@@ -30,8 +30,12 @@ public class Grid {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
+        result.append("<Grid("+size+")>\n");
         for(Cell[] cell: state) {
-            result.append(cell);
+            for(Cell c: cell) {
+                result.append(c);
+            }
+            result.append("\n");
         }
         return result.toString();
     }

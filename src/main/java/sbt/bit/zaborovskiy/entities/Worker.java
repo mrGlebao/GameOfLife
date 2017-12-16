@@ -1,24 +1,21 @@
 package sbt.bit.zaborovskiy.entities;
 
-import org.junit.jupiter.api.function.Executable;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * A class to work with cells.
  */
-public class Worker implements Runnable {
-
-    private final Foreman foreman;
-    private final Grid grid;
+public class Worker extends Thread {
 
     private static int staticPosition = 0;
+    private final Foreman foreman;
+    private final Grid grid;
+    public int position;
 
-    private int position;
     {
         staticPosition = staticPosition + 1;
     }
+
     public Worker(Foreman foreman, Grid grid) {
-        System.out.println("Creating worker on position "+staticPosition );
+        System.out.println("Creating worker on position " + staticPosition);
         this.foreman = foreman;
         this.grid = grid;
         this.position = staticPosition;
@@ -26,11 +23,11 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            System.out.println("Worker " + position);
+        while (foreman.isWorking() && !isInterrupted()) {
+//            System.out.println("Worker " + position);
             Cell cell = pickCell(foreman);
             if (cell == null) {
-                return;
+                continue;
             }
             Shard shard = new Shard(cell, grid);
             boolean isAlive = shard.cellWillBeAlive();
@@ -41,9 +38,9 @@ public class Worker implements Runnable {
         }
     }
 
-    private Cell pickCell(Foreman foreman) {
+    private synchronized Cell pickCell(Foreman foreman) {
         Foreman.Pair pair = foreman.getPair();
-        if ( pair != null) {
+        if (pair != null) {
             return grid.get(pair.row, pair.column);
         }
         return null;
