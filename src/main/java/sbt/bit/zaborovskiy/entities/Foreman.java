@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 //ThreadPoolOwner
 public class Foreman extends Thread {
-    private Cell[][] roadMap;
+    private volatile Cell[][] roadMap;
 
     private List<Worker> employees;
 
@@ -41,16 +41,22 @@ public class Foreman extends Thread {
 //            exec.execute(work);
             work.start();
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             System.out.println("New cycle");
             int size = grid.size;
             availableWork = generatePairs(size);
-            System.out.println("Start loop");
             while (!availableWork.isEmpty()) {
 //                System.out.println(availableWork.size());
             }
             System.out.println("end loop");
+
+            try {
+                Thread.sleep(10_000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             updateGrid();
+
         }
         exec.shutdown();
         isWorking = false;

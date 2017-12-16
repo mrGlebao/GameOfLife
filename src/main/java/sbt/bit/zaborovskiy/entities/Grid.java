@@ -1,5 +1,7 @@
 package sbt.bit.zaborovskiy.entities;
 
+import java.util.List;
+
 /**
  * An infinite grid of cells
  */
@@ -16,6 +18,20 @@ public class Grid {
             }
         }
         size = n;
+    }
+
+    public Grid(List<String> lines) {
+        state = new Cell[lines.size()][lines.size()];
+        size = lines.size();
+        // row
+        for(int i = 0; i< lines.size(); i ++) {
+            // column
+            String line = lines.get(i);
+            for(int j = 0; j < line.length(); j++) {
+                boolean isAlive = line.charAt(j) == '1';
+                state[i][j] = new Cell(i, j, isAlive);
+            }
+        }
     }
 
     private int actualIndex(int position) {
