@@ -23,15 +23,16 @@ public class GameOfLifeImpl implements GameOfLife {
         System.out.println(list);
         Grid grid = new Grid(list);
         System.out.println(grid);
-        Foreman foreman = new Foreman(grid, 8, iterations);
+        Foreman foreman = new Foreman(grid, 2, iterations);
         foreman.start();
-        while (foreman.isWorking()) {
-        }
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        while (foreman.isWorking()) {
+        }
+
         System.out.println("Ready");
 
         return p.parseGrid(grid);

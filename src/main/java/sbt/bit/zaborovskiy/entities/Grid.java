@@ -61,4 +61,9 @@ public class Grid {
         return state[actualIndex(row)][actualIndex(column)];
     }
 
+    public void setState(List<Cell> list) {
+        for(Cell cell: list) {
+            state[cell.row][cell.column] = cell;
+        }
+    }
 }

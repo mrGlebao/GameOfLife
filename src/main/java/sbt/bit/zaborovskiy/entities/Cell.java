@@ -1,6 +1,6 @@
 package sbt.bit.zaborovskiy.entities;
 
-public class Cell implements Cloneable {
+public class Cell {
 
     // anchor to grid
     public int row;
@@ -12,18 +12,6 @@ public class Cell implements Cloneable {
         this.row = row;
         this.column = column;
         this.isAlive = isAlive;
-    }
-
-    @Override
-    public Cell clone() {
-        try {
-            Cell result = (Cell) super.clone();
-            result.setAlive(this.isAlive());
-            return result;
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            throw new AssertionError("Can't create cell clone");
-        }
     }
 
     public boolean isAlive() {
