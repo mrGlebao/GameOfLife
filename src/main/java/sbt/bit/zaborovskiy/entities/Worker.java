@@ -5,7 +5,7 @@ import java.util.concurrent.Callable;
 /**
  * A class to work with cells.
  */
-public class Worker extends Thread implements Callable<Boolean> {
+public class Worker implements Callable<Boolean>, Runnable {
 
     private static int staticPosition = 0;
     private final Foreman foreman;
@@ -25,7 +25,7 @@ public class Worker extends Thread implements Callable<Boolean> {
 
     @Override
     public void run() {
-        while (foreman.isWorking() && !isInterrupted()) {
+        while (foreman.isWorking()) {
             Cell cell = pickCell(foreman);
             //New cycle of foreman's work
             if (cell == null) {

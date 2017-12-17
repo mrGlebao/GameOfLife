@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Grid {
 
-    public Cell[][] state;
+    public volatile Cell[][] state;
     public int size;
 
     public Grid(int n) {
@@ -61,7 +61,7 @@ public class Grid {
         return state[actualIndex(row)][actualIndex(column)];
     }
 
-    public void setState(List<Cell> list) {
+    public synchronized void setState(List<Cell> list) {
         for(Cell cell: list) {
             state[cell.row][cell.column] = cell;
         }
