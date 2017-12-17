@@ -2,6 +2,7 @@ package sbt.bit.zaborovskiy.implementations;
 
 import sbt.bit.zaborovskiy.entities.Foreman;
 import sbt.bit.zaborovskiy.entities.Grid;
+import sbt.bit.zaborovskiy.settings.Config;
 
 public class MultiThreadedGameOfLife extends AbstractGameOfLife {
     @Override
@@ -11,7 +12,7 @@ public class MultiThreadedGameOfLife extends AbstractGameOfLife {
 
     @Override
     public Grid sumPhase(Grid grid) {
-        Foreman foreman = new Foreman(grid, 8);
+        Foreman foreman = new Foreman(grid, Config.THREAD_NUMBER);
         foreman.start();
         while (foreman.isWorking) {
         }
