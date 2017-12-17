@@ -22,8 +22,4 @@ public class SingleThreadedGameOfLife extends AbstractGameOfLife{
         return result;
     }
 
-    @Override
-    public void updatePhase(Grid oldGrid, Grid newGrid) {
-        oldGrid.state = newGrid.state;
-    }
 }

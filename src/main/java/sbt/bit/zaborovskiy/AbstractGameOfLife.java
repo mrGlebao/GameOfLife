@@ -34,7 +34,9 @@ public abstract class AbstractGameOfLife implements GameOfLife {
 
     public abstract Grid sumPhase(Grid grid);
 
-    public abstract void updatePhase(Grid newGrid, Grid oldGrid);
+    public void updatePhase(Grid oldGrid, Grid newGrid) {
+        oldGrid.state = newGrid.state;
+    }
 
     private Grid createGrid(List<String> list) {
         list.remove(0);

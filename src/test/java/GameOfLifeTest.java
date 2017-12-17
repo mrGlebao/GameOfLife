@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 import sbt.bit.zaborovskiy.GameOfLife;
 import sbt.bit.zaborovskiy.GameOfLifeImpl;
+import sbt.bit.zaborovskiy.MultiThreadedGameOfLife;
 import sbt.bit.zaborovskiy.SingleThreadedGameOfLife;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class GameOfLifeTest {
 
     @Before
     public void before() {
-        gameOfLife = new GameOfLifeImpl();
+        gameOfLife = new MultiThreadedGameOfLife();
     }
 
     @Test
