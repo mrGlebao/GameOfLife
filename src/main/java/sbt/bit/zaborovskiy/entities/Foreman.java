@@ -10,7 +10,7 @@ public class Foreman extends Thread {
     public volatile boolean isWorking;
     private volatile List<Cell> roadMap;
     private List<Worker> employees;
-    private volatile List<Pair> availableWork;
+    private volatile List<Integer> availableWork;
     private volatile Grid grid;
     private volatile int resultSize;
 
@@ -29,10 +29,10 @@ public class Foreman extends Thread {
         super.start();
     }
 
-    public synchronized Pair getPair() {
+    public synchronized Cell[] getRow() {
         return (availableWork == null || availableWork.isEmpty())
                 ? null
-                : availableWork.remove(0);
+                : grid.state[availableWork.remove(0)];
     }
 
     public void run() {
@@ -43,7 +43,7 @@ public class Foreman extends Thread {
             work.start();
         }
         int size = grid.size;
-        availableWork = generatePairs(size);
+        availableWork = generateRows(size);
         while (resultSize != size * size) {
         }
         for (Thread work : employees) {
@@ -60,30 +60,17 @@ public class Foreman extends Thread {
         roadMap = new ArrayList<>();
     }
 
-    private List<Pair> generatePairs(int size) {
-        List<Pair> pairs = new ArrayList<>();
+    private List<Integer> generateRows(int size) {
+        List<Integer> rows = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                pairs.add(new Pair(i, j));
-            }
+            rows.add(i);
         }
-        return pairs;
+        return rows;
     }
 
     public synchronized void setResult(Cell result) {
         roadMap.add(result);
         resultSize += 1;
-    }
-
-
-    public class Pair {
-        public int row;
-        public int column;
-
-        public Pair(int row, int column) {
-            this.row = row;
-            this.column = column;
-        }
     }
 
 }
