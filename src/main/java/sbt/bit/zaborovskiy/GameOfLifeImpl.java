@@ -25,12 +25,8 @@ public class GameOfLifeImpl implements GameOfLife {
         System.out.println(grid);
         Foreman foreman = new Foreman(grid, 2, iterations);
         foreman.start();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        while (foreman.isWorking()) {
+
+        while (!foreman.endedEverything) {
         }
 
         System.out.println("Ready");

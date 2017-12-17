@@ -13,6 +13,7 @@ public class Foreman extends Thread {
     private volatile List<Pair> availableWork;
 
     private volatile boolean isWorking;
+    public volatile boolean endedEverything;
 
     private ExecutorService exec = Executors.newCachedThreadPool();
     private Grid grid;
@@ -62,7 +63,7 @@ public class Foreman extends Thread {
 
         }
 //        exec.shutdown();
-        isWorking = false;
+        endedEverything = true;
         //exec.shutdownNow();
     }
 
