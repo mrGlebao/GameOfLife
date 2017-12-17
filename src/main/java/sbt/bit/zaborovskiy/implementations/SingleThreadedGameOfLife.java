@@ -1,7 +1,7 @@
 package sbt.bit.zaborovskiy.implementations;
 
 import sbt.bit.zaborovskiy.dto.Cell;
-import sbt.bit.zaborovskiy.entities.Grid;
+import sbt.bit.zaborovskiy.dto.Grid;
 import sbt.bit.zaborovskiy.dto.Shard;
 
 public class SingleThreadedGameOfLife extends AbstractGameOfLife{

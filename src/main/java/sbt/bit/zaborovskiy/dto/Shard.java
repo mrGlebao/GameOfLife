@@ -1,7 +1,5 @@
 package sbt.bit.zaborovskiy.dto;
 
-import sbt.bit.zaborovskiy.entities.Grid;
-
 import java.util.Arrays;
 import java.util.Objects;
 

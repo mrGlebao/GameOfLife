@@ -1,4 +1,4 @@
-package sbt.bit.zaborovskiy.entities;
+package sbt.bit.zaborovskiy.dto;
 
 import sbt.bit.zaborovskiy.dto.Cell;
 

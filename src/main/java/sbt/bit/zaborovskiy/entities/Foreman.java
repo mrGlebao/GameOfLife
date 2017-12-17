@@ -1,6 +1,7 @@
 package sbt.bit.zaborovskiy.entities;
 
 import sbt.bit.zaborovskiy.dto.Cell;
+import sbt.bit.zaborovskiy.dto.Grid;
 
 import java.util.ArrayList;
 import java.util.List;

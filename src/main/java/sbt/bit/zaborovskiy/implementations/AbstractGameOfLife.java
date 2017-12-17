@@ -1,6 +1,6 @@
 package sbt.bit.zaborovskiy.implementations;
 
-import sbt.bit.zaborovskiy.entities.Grid;
+import sbt.bit.zaborovskiy.dto.Grid;
 import sbt.bit.zaborovskiy.parser.Parser;
 
 import java.io.FileNotFoundException;
