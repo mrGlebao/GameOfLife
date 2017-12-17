@@ -36,6 +36,6 @@ public class Cell implements Cloneable {
 
     @Override
     public String toString() {
-        return isAlive ? "+" : "0";
+        return isAlive ? "1" : "0";
     }
 }

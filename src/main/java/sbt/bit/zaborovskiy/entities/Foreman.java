@@ -7,10 +7,9 @@ import java.util.concurrent.Executors;
 
 //ThreadPoolOwner
 public class Foreman extends Thread {
+    private final int iterations;
     private volatile Cell[][] roadMap;
-
     private List<Worker> employees;
-
     private volatile List<Pair> availableWork;
 
     private volatile boolean isWorking;
@@ -18,9 +17,10 @@ public class Foreman extends Thread {
     private ExecutorService exec = Executors.newCachedThreadPool();
     private Grid grid;
 
-    public Foreman(Grid grid, int employeesSize) {
+    public Foreman(Grid grid, int employeesSize, int iterations) {
         this.grid = grid;
         this.roadMap = new Cell[grid.size][grid.size];
+        this.iterations = iterations;
         employees = new ArrayList<>();
         for (int i = 0; i < employeesSize; i++) {
             employees.add(new Worker(this, grid));
@@ -41,7 +41,7 @@ public class Foreman extends Thread {
 //            exec.execute(work);
             work.start();
         }
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < iterations; i++) {
             System.out.println("New cycle");
             int size = grid.size;
             availableWork = generatePairs(size);
@@ -51,7 +51,7 @@ public class Foreman extends Thread {
             System.out.println("end loop");
 
             try {
-                Thread.sleep(10_000);
+                Thread.sleep(1_000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -60,10 +60,6 @@ public class Foreman extends Thread {
         }
         exec.shutdown();
         isWorking = false;
-//        for(Worker work : employees) {
-//            System.out.println("Interrupt thread "+work.position);
-//            work.interrupt();
-//        }
         //exec.shutdownNow();
     }
 

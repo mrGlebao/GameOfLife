@@ -27,4 +27,16 @@ public class Parser {
         return Integer.valueOf(s.split(" ")[1]);
     }
 
+    public List<String> parseGrid(Grid grid) {
+        List<String> result = new ArrayList<>();
+        for(Cell[] cells: grid.state) {
+            String row = "";
+            for(Cell c: cells) {
+                row+=c.toString();
+            }
+            result.add(row);
+        }
+        return result;
+    }
+
 }

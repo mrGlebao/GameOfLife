@@ -1,3 +1,5 @@
+package sbt.bit.zaborovskiy;
+
 import java.util.List;
 
 /**

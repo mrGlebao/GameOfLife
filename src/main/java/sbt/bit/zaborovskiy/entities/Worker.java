@@ -1,9 +1,11 @@
 package sbt.bit.zaborovskiy.entities;
 
+import java.util.concurrent.Callable;
+
 /**
  * A class to work with cells.
  */
-public class Worker extends Thread {
+public class Worker extends Thread implements Callable<Boolean> {
 
     private static int staticPosition = 0;
     private final Foreman foreman;
@@ -24,17 +26,14 @@ public class Worker extends Thread {
     @Override
     public void run() {
         while (foreman.isWorking() && !isInterrupted()) {
-//            System.out.println("Worker " + position);
             Cell cell = pickCell(foreman);
+            //New cycle of foreman's work
             if (cell == null) {
                 continue;
             }
             Shard shard = new Shard(cell, grid);
             boolean isAlive = shard.cellWillBeAlive();
             sendResultToForeman(new Cell(cell.row, cell.column, isAlive));
-            if (shard.cellWillBeAlive()) {
-                System.out.println("Will be alive");
-            }
         }
     }
 
@@ -49,5 +48,11 @@ public class Worker extends Thread {
 
     private void sendResultToForeman(Cell result) {
         foreman.setResult(result);
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        run();
+        return true;
     }
 }
