@@ -19,22 +19,20 @@ public class Parser {
         return lines;
     }
 
-    public Integer getN(String s) {
-        return Integer.valueOf(s.split(" ")[0]);
-    }
-
     public Integer getM(String s) {
         return Integer.valueOf(s.split(" ")[1]);
     }
 
     public List<String> parseGrid(Grid grid) {
         List<String> result = new ArrayList<>();
-        for(Cell[] cells: grid.state) {
-            String row = "";
-            for(Cell c: cells) {
-                row+=c.toString();
+        for (Cell[] cells : grid.state) {
+            StringBuilder row = new StringBuilder();
+            for (Cell c : cells) {
+                if (c != null) {
+                    row.append(c.toString());
+                }
             }
-            result.add(row);
+            result.add(row.toString());
         }
         return result;
     }

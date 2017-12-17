@@ -14,7 +14,7 @@ public class GameOfLifeImpl implements GameOfLife {
         List<String> list = null;
         int iterations = 0;
         try {
-            list = p.readFile(inputFile);
+            list = Parser.readFile(inputFile);
             String line = list.remove(0);
             iterations = p.getM(line);
         } catch (FileNotFoundException e) {
@@ -25,13 +25,12 @@ public class GameOfLifeImpl implements GameOfLife {
         System.out.println(grid);
         Foreman foreman = new Foreman(grid, 8, iterations);
         foreman.start();
+        while (foreman.isWorking()) {
+        }
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        while(foreman.isWorking()) {
-
         }
         System.out.println("Ready");
 

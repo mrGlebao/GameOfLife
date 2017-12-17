@@ -12,8 +12,8 @@ public class Grid {
 
     public Grid(int n) {
         state = new Cell[n][n];
-        for(int i = 0; i< n; i++) {
-            for(int j = 0; j< n; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 state[i][j] = new Cell(i, j, true);
             }
         }
@@ -24,10 +24,10 @@ public class Grid {
         state = new Cell[lines.size()][lines.size()];
         size = lines.size();
         // row
-        for(int i = 0; i< lines.size(); i ++) {
+        for (int i = 0; i < lines.size(); i++) {
             // column
             String line = lines.get(i);
-            for(int j = 0; j < line.length(); j++) {
+            for (int j = 0; j < line.length(); j++) {
                 boolean isAlive = line.charAt(j) == '1';
                 state[i][j] = new Cell(i, j, isAlive);
             }
@@ -47,8 +47,8 @@ public class Grid {
     public String toString() {
         StringBuilder result = new StringBuilder();
 //        result.append("<Grid("+size+")>\n");
-        for(Cell[] cell: state) {
-            for(Cell c: cell) {
+        for (Cell[] cell : state) {
+            for (Cell c : cell) {
                 result.append(c);
             }
             result.append("\n");

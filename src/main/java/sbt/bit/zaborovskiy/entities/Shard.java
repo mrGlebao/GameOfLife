@@ -41,7 +41,7 @@ public class Shard {
                         .filter(Cell::isAlive)
                         .count())
                 .reduce(0L, (a, b) -> a + b);
-        if(center.isAlive()) {
+        if (center.isAlive()) {
             aliveNeighbors = aliveNeighbors - 1;
         }
         if (center.isAlive()) {

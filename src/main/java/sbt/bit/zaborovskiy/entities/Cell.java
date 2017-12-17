@@ -17,7 +17,7 @@ public class Cell implements Cloneable {
     @Override
     public Cell clone() {
         try {
-            Cell result  = (Cell)super.clone();
+            Cell result = (Cell) super.clone();
             result.setAlive(this.isAlive());
             return result;
         } catch (CloneNotSupportedException e) {

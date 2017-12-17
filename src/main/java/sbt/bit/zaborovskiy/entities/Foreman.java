@@ -16,6 +16,7 @@ public class Foreman extends Thread {
 
     private ExecutorService exec = Executors.newCachedThreadPool();
     private Grid grid;
+    private volatile int resultSize;
 
     public Foreman(Grid grid, int employeesSize, int iterations) {
         this.grid = grid;
@@ -35,30 +36,39 @@ public class Foreman extends Thread {
 
     public void run() {
         isWorking = true;
-//        availableWork = generatePairs(grid.size);
+
+//        List<Future<Boolean>> fut = null;
+//        try {
+//            fut = exec.invokeAll(employees);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         for (Worker work : employees) {
             System.out.println("New worker! " + work.position);
-//            exec.execute(work);
             work.start();
         }
+
         for (int i = 0; i < iterations; i++) {
+            resultSize = 0;
             System.out.println("New cycle");
+
             int size = grid.size;
             availableWork = generatePairs(size);
-            while (!availableWork.isEmpty()) {
+            while (!availableWork.isEmpty() && resultSize != size * size) {
 //                System.out.println(availableWork.size());
+                System.out.println(resultSize+" RESULT");
+                System.out.println(size*size+" SIZE");
             }
+//            for(Thread t: employees) {
+//                t.interrupt();
+//            }
             System.out.println("end loop");
 
-            try {
-                Thread.sleep(1_000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             updateGrid();
 
         }
-        exec.shutdown();
+//        exec.shutdown();
         isWorking = false;
         //exec.shutdownNow();
     }
@@ -79,8 +89,9 @@ public class Foreman extends Thread {
         return pairs;
     }
 
-    public void setResult(Cell result) {
+    public synchronized void setResult(Cell result) {
         roadMap[result.row][result.column] = result;
+        resultSize+=1;
     }
 
     public boolean hasWork() {
