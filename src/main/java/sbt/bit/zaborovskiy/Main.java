@@ -1,5 +1,8 @@
 package sbt.bit.zaborovskiy;
 
+import sbt.bit.zaborovskiy.implementations.GameOfLife;
+import sbt.bit.zaborovskiy.implementations.SingleThreadedGameOfLife;
+
 import java.util.List;
 
 /**

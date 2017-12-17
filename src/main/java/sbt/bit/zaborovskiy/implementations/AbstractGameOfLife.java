@@ -1,4 +1,4 @@
-package sbt.bit.zaborovskiy;
+package sbt.bit.zaborovskiy.implementations;
 
 import sbt.bit.zaborovskiy.entities.Grid;
 import sbt.bit.zaborovskiy.parser.Parser;

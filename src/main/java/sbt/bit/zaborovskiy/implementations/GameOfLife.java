@@ -1,4 +1,4 @@
-package sbt.bit.zaborovskiy;
+package sbt.bit.zaborovskiy.implementations;
 
 import java.util.List;
 

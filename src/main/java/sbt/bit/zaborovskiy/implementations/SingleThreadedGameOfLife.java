@@ -1,4 +1,4 @@
-package sbt.bit.zaborovskiy;
+package sbt.bit.zaborovskiy.implementations;
 
 import sbt.bit.zaborovskiy.dto.Cell;
 import sbt.bit.zaborovskiy.entities.Grid;

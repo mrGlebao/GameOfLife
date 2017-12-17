@@ -1,8 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
-import sbt.bit.zaborovskiy.GameOfLife;
-import sbt.bit.zaborovskiy.MultiThreadedGameOfLife;
-import sbt.bit.zaborovskiy.SingleThreadedGameOfLife;
+import sbt.bit.zaborovskiy.implementations.GameOfLife;
+import sbt.bit.zaborovskiy.implementations.MultiThreadedGameOfLife;
 import sbt.bit.zaborovskiy.parser.Parser;
 
 import java.io.FileNotFoundException;
