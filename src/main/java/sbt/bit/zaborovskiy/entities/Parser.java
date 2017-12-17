@@ -19,11 +19,15 @@ public class Parser {
         return lines;
     }
 
-    public Integer getM(String s) {
+    public static Integer getIterations(String s) {
         return Integer.valueOf(s.split(" ")[1]);
     }
 
-    public List<String> parseGrid(Grid grid) {
+    public static Integer getSize(String s) {
+        return Integer.valueOf(s.split(" ")[0]);
+    }
+
+    public static List<String> parseGrid(Grid grid) {
         List<String> result = new ArrayList<>();
         for (Cell[] cells : grid.state) {
             StringBuilder row = new StringBuilder();

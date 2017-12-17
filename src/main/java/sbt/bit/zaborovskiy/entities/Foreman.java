@@ -46,16 +46,12 @@ public class Foreman extends Thread {
             int size = grid.size;
             availableWork = generatePairs(size);
             while (!availableWork.isEmpty() && resultSize != size * size) {
-                System.out.println(resultSize + " RESULT");
-                System.out.println(size * size + " SIZE");
+//                System.out.println(resultSize + " RESULT");
+//                System.out.println(size * size + " SIZE");
             }
 
-            System.out.println("end loop");
+            System.out.println("end loop "+i);
 
-//            for (Worker work : employees) {
-//                System.out.println("Interrupt");
-//                work.interrupt();
-//            }
             isWorking = false;
             updateGrid();
 

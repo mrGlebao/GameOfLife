@@ -16,7 +16,7 @@ public class GameOfLifeImpl implements GameOfLife {
         try {
             list = Parser.readFile(inputFile);
             String line = list.remove(0);
-            iterations = p.getM(line);
+            iterations = Parser.getIterations(line);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
