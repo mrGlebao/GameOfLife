@@ -1,6 +1,7 @@
 package sbt.bit.zaborovskiy.entities;
 
-import java.util.concurrent.Callable;
+import sbt.bit.zaborovskiy.dto.Cell;
+import sbt.bit.zaborovskiy.dto.Shard;
 
 /**
  * A class to work with cells.

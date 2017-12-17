@@ -1,18 +1,16 @@
 package sbt.bit.zaborovskiy.entities;
 
+import sbt.bit.zaborovskiy.dto.Cell;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 //ThreadPoolOwner
 public class Foreman extends Thread {
-    public volatile boolean endedEverything;
+    public volatile boolean isWorking;
     private volatile List<Cell> roadMap;
     private List<Worker> employees;
     private volatile List<Pair> availableWork;
-    public volatile boolean isWorking;
-    private ExecutorService exec = Executors.newCachedThreadPool();
     private Grid grid;
     private volatile int resultSize;
 

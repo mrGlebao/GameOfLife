@@ -1,5 +1,7 @@
 package sbt.bit.zaborovskiy.entities;
 
+import sbt.bit.zaborovskiy.dto.Cell;
+
 import java.util.List;
 
 /**

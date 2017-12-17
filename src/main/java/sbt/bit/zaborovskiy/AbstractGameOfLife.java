@@ -1,7 +1,7 @@
 package sbt.bit.zaborovskiy;
 
 import sbt.bit.zaborovskiy.entities.Grid;
-import sbt.bit.zaborovskiy.entities.Parser;
+import sbt.bit.zaborovskiy.parser.Parser;
 
 import java.io.FileNotFoundException;
 import java.util.List;
