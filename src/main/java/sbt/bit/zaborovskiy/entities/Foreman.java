@@ -11,7 +11,7 @@ public class Foreman extends Thread {
     private volatile List<Cell> roadMap;
     private List<Worker> employees;
     private volatile List<Pair> availableWork;
-    private Grid grid;
+    private volatile Grid grid;
     private volatile int resultSize;
 
     public Foreman(Grid grid, int employeesSize) {
@@ -44,7 +44,7 @@ public class Foreman extends Thread {
         }
         int size = grid.size;
         availableWork = generatePairs(size);
-        while (!availableWork.isEmpty() && resultSize != size * size) {
+        while (resultSize != size * size) {
         }
         for (Thread work : employees) {
             System.out.println("Interrupt! ");
@@ -75,13 +75,6 @@ public class Foreman extends Thread {
         resultSize += 1;
     }
 
-    public boolean hasWork() {
-        return availableWork != null && !availableWork.isEmpty();
-    }
-
-    public synchronized boolean isWorking() {
-        return isWorking;
-    }
 
     public class Pair {
         public int row;

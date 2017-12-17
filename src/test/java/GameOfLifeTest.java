@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 import sbt.bit.zaborovskiy.GameOfLife;
 import sbt.bit.zaborovskiy.MultiThreadedGameOfLife;
+import sbt.bit.zaborovskiy.SingleThreadedGameOfLife;
 import sbt.bit.zaborovskiy.parser.Parser;
 
 import java.io.FileNotFoundException;
@@ -26,6 +27,13 @@ public class GameOfLifeTest {
 
     @Test
     public void testGame() throws Exception {
+        testOneGame("resources/input100.txt", "resources/output100.txt");
+        testOneGame("resources/input100.txt", "resources/output100.txt");
+        testOneGame("resources/input100.txt", "resources/output100.txt");
+        testOneGame("resources/input100.txt", "resources/output100.txt");
+        testOneGame("resources/input100.txt", "resources/output100.txt");
+        testOneGame("resources/input100.txt", "resources/output100.txt");
+        testOneGame("resources/input100.txt", "resources/output100.txt");
         testOneGame("resources/input100.txt", "resources/output100.txt");
     }
 
